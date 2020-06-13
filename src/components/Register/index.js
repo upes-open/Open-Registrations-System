@@ -3,6 +3,7 @@ import { Typography, Paper, Avatar, Button, FormControl, Input, InputLabel } fro
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link, withRouter } from 'react-router-dom'
+import MuiPhoneNumber from 'material-ui-phone-number'
 import firebase from '../firebase'
 const styles = theme => ({
 	main: {
@@ -43,7 +44,10 @@ function Register(props) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [github, setGithub] = useState('')
-
+	const [linkedin, setLinkedin] = useState('')
+	const [twitter, setTwitter] = useState('')
+	const [dob, setDOB] = useState('')
+	const [phone, setPhone] = useState('')
 	return (
 		<main className={classes.main}>
 			<Paper className={classes.paper}>
@@ -62,14 +66,35 @@ function Register(props) {
 						<InputLabel htmlFor="email">Email Address</InputLabel>
 						<Input id="email" name="email" autoComplete="off" value={email} onChange={e => setEmail(e.target.value)}  />
 					</FormControl>
+					<FormControl margin="normal" fullWidth>
+						{/* <InputLabel htmlFor="dob">Date of Birth</InputLabel> */}
+						<Input name="dob" type="date" id="dob" autoComplete="off" value={dob} onChange={e => setDOB(e.target.value)}  />
+					</FormControl>
+					<MuiPhoneNumber
+						name="phone"
+						label="Phone Number"
+						data-cy="user-phone"
+						defaultCountry={"in"}
+						value={phone}
+						onChange={e => setPhone(e.target.value)}
+					/>
 					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="password">Password</InputLabel>
 						<Input name="password" type="password" id="password" autoComplete="off" value={password} onChange={e => setPassword(e.target.value)}  />
 					</FormControl>
-					<FormControl margin="normal" required fullWidth>
-						<InputLabel htmlFor="quote">Your Gihtub Username</InputLabel>
-						<Input name="quote" type="text" id="quote" autoComplete="off" value={github} onChange={e => setGithub(e.target.value)}  />
+					<FormControl margin="normal" fullWidth>
+						<InputLabel htmlFor="github">Your Github Username</InputLabel>
+						<Input name="github" type="text" id="github" autoComplete="off" value={github} onChange={e => setGithub(e.target.value)}  />
 					</FormControl>
+					<FormControl margin="normal" fullWidth>
+						<InputLabel htmlFor="linkedin">Your Linkedin Handle</InputLabel>
+						<Input name="linkedin" type="text" id="linkedin" autoComplete="off" value={linkedin} onChange={e => setLinkedin(e.target.value)}  />
+					</FormControl>
+					<FormControl margin="normal" fullWidth>
+						<InputLabel htmlFor="twitter">Your Twitter Handle</InputLabel>
+						<Input name="twitter" type="text" id="twitter" autoComplete="off" value={twitter} onChange={e => setTwitter(e.target.value)}  />
+					</FormControl>
+					
 
 					<Button
 						type="submit"

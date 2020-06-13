@@ -1,11 +1,12 @@
 {
-  "name": "react-hooks-firebase",
+  "name": "open-registrations",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "firebase": "^5.8.2",
+    "material-ui-phone-number": "^2.2.6",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-router-dom": "^4.3.1",
