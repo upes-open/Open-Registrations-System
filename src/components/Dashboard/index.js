@@ -44,9 +44,19 @@ function Dashboard(props) {
 	}
 
 	const [github, setGithub] = useState('')
+	const [linkedin, setLinkedin] = useState('')
+	const [twitter, setTwitter] = useState('')
+	const [dob, setDOB] = useState('')
+	const [phone, setPhone] = useState('')
+	const [university, setUniversity] = useState('')
 
 	useEffect(() => {
 		firebase.getCurrentUserGithub().then(setGithub)
+		firebase.getCurrentUserPhone().then(setPhone)
+		firebase.getCurrentUserDOB().then(setDOB)
+		firebase.getCurrentUserLinkedin().then(setLinkedin)
+		firebase.getCurrentUserTwitter().then(setTwitter)
+		firebase.getCurrentUserUniversity().then(setUniversity)
 	})
 
 	return (
@@ -55,11 +65,26 @@ function Dashboard(props) {
 				<Avatar className={classes.avatar}>
 					<VerifiedUserOutlined />
 				</Avatar>
-				<Typography component="h1" variant="h5">
+				<Typography  variant="h4">
 					Hello { firebase.getCurrentUsername() }
 				</Typography>
-				<Typography component="h1" variant="h5">
+				<Typography variant="h6"c>
 					Your Github Handle : {github ? `"${github}"` : <CircularProgress size={20} />}
+				</Typography>
+				<Typography variant="h6">
+					Your DOB : {dob ? `"${dob}"` : <CircularProgress size={20} />}
+				</Typography>
+				<Typography variant="h6">
+					Your Phone : {phone ? `"${phone}"` : <CircularProgress size={20} />}
+				</Typography>
+				<Typography variant="h6">
+					Your Linkedin : {linkedin ? `"${linkedin}"` : <CircularProgress size={20} />}
+				</Typography>
+				<Typography variant="h6">
+					Your Twitter : {twitter ? `"${twitter}"` : <CircularProgress size={20} />}
+				</Typography>
+				<Typography  variant="h6">
+					Your University : {university ? `"${university}"` : <CircularProgress size={20} />}
 				</Typography>
 				<Button
 					type="submit"

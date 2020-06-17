@@ -30,20 +30,82 @@ class Firebase {
 
 	async register(name, email, password) {
 		await this.auth.createUserWithEmailAndPassword(email, password)
+		var user = this.auth.currentUser;
+			user.sendEmailVerification().then(function() {
+			// Email sent.
+			}).catch(function(error) {
+			// An error happened.
+			});
 		return this.auth.currentUser.updateProfile({
 			displayName: name
 		})
 	}
 
-	addGithub(github) {
+	addDetails(github,phone,dob,linkedin,twitter,university) {
 		if(!this.auth.currentUser) {
 			return alert('Not authorized')
 		}
 
 		return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
-			github
+			github: github,
+			phone: phone,
+			dob: dob,
+			linkedin: linkedin,
+			twitter: twitter,
+			university: university
+
 		})
 	}
+
+	// addPhone(phone) {
+	// 	if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+	// 	}
+
+	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
+	// 		phone: phone
+	// 	})
+	// }
+
+	// addDOB(dob) {
+	// 	if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+	// 	}
+
+	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
+	// 		dob: dob
+	// 	})
+	// }
+
+	// addLinkedin(linkedin) {
+	// 	if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+	// 	}
+
+	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
+	// 		linkedin: linkedin
+	// 	})
+	// }
+
+	// addTwitter(twitter) {
+	// 	if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+	// 	}
+
+	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
+	// 		twitter: twitter
+	// 	})
+	// }
+
+	// addUniversity(university) {
+	// 	if(!this.auth.currentUser) {
+	// 		return alert('Not authorized')
+	// 	}
+
+	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
+	// 		university: university
+	// 	})
+	// }
 
 	isInitialized() {
 		return new Promise(resolve => {
@@ -58,6 +120,26 @@ class Firebase {
 	async getCurrentUserGithub() {
 		const github = await this.db.doc(`users/${this.auth.currentUser.uid}`).get()
 		return github.get('github')
+	}
+	async getCurrentUserLinkedin() {
+		const github = await this.db.doc(`users/${this.auth.currentUser.uid}`).get()
+		return github.get('linkedin')
+	}
+	async getCurrentUserPhone() {
+		const github = await this.db.doc(`users/${this.auth.currentUser.uid}`).get()
+		return github.get('phone')
+	}
+	async getCurrentUserDOB() {
+		const github = await this.db.doc(`users/${this.auth.currentUser.uid}`).get()
+		return github.get('dob')
+	}
+	async getCurrentUserTwitter() {
+		const github = await this.db.doc(`users/${this.auth.currentUser.uid}`).get()
+		return github.get('twitter')
+	}
+	async getCurrentUserUniversity() {
+		const github = await this.db.doc(`users/${this.auth.currentUser.uid}`).get()
+		return github.get('univeristy')
 	}
 }
 

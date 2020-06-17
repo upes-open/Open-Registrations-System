@@ -3,7 +3,7 @@ import { Typography, Paper, Avatar, Button, FormControl, Input, InputLabel } fro
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link, withRouter } from 'react-router-dom'
-import MuiPhoneNumber from 'material-ui-phone-number'
+// import MuiPhoneNumber from 'material-ui-phone-number'
 import firebase from '../firebase'
 const styles = theme => ({
 	main: {
@@ -48,6 +48,8 @@ function Register(props) {
 	const [twitter, setTwitter] = useState('')
 	const [dob, setDOB] = useState('')
 	const [phone, setPhone] = useState('')
+	const [university, setUniversity] = useState('')
+
 	return (
 		<main className={classes.main}>
 			<Paper className={classes.paper}>
@@ -70,14 +72,18 @@ function Register(props) {
 						{/* <InputLabel htmlFor="dob">Date of Birth</InputLabel> */}
 						<Input name="dob" type="date" id="dob" autoComplete="off" value={dob} onChange={e => setDOB(e.target.value)}  />
 					</FormControl>
-					<MuiPhoneNumber
+					<FormControl margin="normal" required fullWidth>
+						<InputLabel htmlFor="phone">Phone Number</InputLabel>
+						<Input id="phone" name="phone" autoComplete="off" value={phone} onChange={e => setPhone(e.target.value)}  />
+					</FormControl>
+					{/* <MuiPhoneNumber
+						id="phone"
 						name="phone"
 						label="Phone Number"
-						data-cy="user-phone"
 						defaultCountry={"in"}
 						value={phone}
 						onChange={e => setPhone(e.target.value)}
-					/>
+					/> */}
 					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="password">Password</InputLabel>
 						<Input name="password" type="password" id="password" autoComplete="off" value={password} onChange={e => setPassword(e.target.value)}  />
@@ -94,8 +100,12 @@ function Register(props) {
 						<InputLabel htmlFor="twitter">Your Twitter Handle</InputLabel>
 						<Input name="twitter" type="text" id="twitter" autoComplete="off" value={twitter} onChange={e => setTwitter(e.target.value)}  />
 					</FormControl>
+					<FormControl margin="normal" fullWidth>
+						<InputLabel htmlFor="university">University/ College/ Instituition</InputLabel>
+						<Input name="university" type="text" id="university" autoComplete="off" value={university} onChange={e => setUniversity(e.target.value)}  />
+					</FormControl>
+				
 					
-
 					<Button
 						type="submit"
 						fullWidth
@@ -121,10 +131,17 @@ function Register(props) {
 		</main>
 	)
 
+
 	async function onRegister() {
 		try {
 			await firebase.register(name, email, password)
-			await firebase.addGithub(github)
+			await firebase.addDetails(github,phone,dob,linkedin,twitter,university)
+			
+			// await firebase.addPhone(phone)
+			// await firebase.addDOB(dob)
+			// await firebase.addLinkedin(linkedin)
+			// await firebase.addTwitter(twitter)
+			// await firebase.addUniversity(university)
 			props.history.replace('/dashboard')
 		} catch(error) {
 			alert(error.message)
