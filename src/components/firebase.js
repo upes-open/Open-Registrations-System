@@ -19,7 +19,7 @@ class Firebase {
 		this.auth = app.auth()
 		this.db = app.firestore()
 	}
-
+	
 	login(email, password) {
 		return this.auth.signInWithEmailAndPassword(email, password)
 	}
@@ -40,7 +40,9 @@ class Firebase {
 			displayName: name
 		})
 	}
-
+	getEmailStatus(){
+		return this.auth.currentUser.emailVerified
+	}
 	addDetails(github,phone,dob,linkedin,twitter,university) {
 		if(!this.auth.currentUser) {
 			return alert('Not authorized')
@@ -52,60 +54,10 @@ class Firebase {
 			dob: dob,
 			linkedin: linkedin,
 			twitter: twitter,
-			university: university
+			university: university,
 
 		})
 	}
-
-	// addPhone(phone) {
-	// 	if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-	// 	}
-
-	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
-	// 		phone: phone
-	// 	})
-	// }
-
-	// addDOB(dob) {
-	// 	if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-	// 	}
-
-	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
-	// 		dob: dob
-	// 	})
-	// }
-
-	// addLinkedin(linkedin) {
-	// 	if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-	// 	}
-
-	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
-	// 		linkedin: linkedin
-	// 	})
-	// }
-
-	// addTwitter(twitter) {
-	// 	if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-	// 	}
-
-	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
-	// 		twitter: twitter
-	// 	})
-	// }
-
-	// addUniversity(university) {
-	// 	if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-	// 	}
-
-	// 	return this.db.doc(`users/${this.auth.currentUser.uid}`).set({
-	// 		university: university
-	// 	})
-	// }
 
 	isInitialized() {
 		return new Promise(resolve => {
@@ -139,7 +91,7 @@ class Firebase {
 	}
 	async getCurrentUserUniversity() {
 		const github = await this.db.doc(`users/${this.auth.currentUser.uid}`).get()
-		return github.get('univeristy')
+		return github.get('university')
 	}
 }
 

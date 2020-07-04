@@ -88,7 +88,16 @@ function SignIn(props) {
 	async function login() {
 		try {
 			await firebase.login(email, password)
-			props.history.replace('/dashboard')
+			var status = firebase.getEmailStatus()
+			console.log(status)
+			if(status){
+				props.history.replace('/dashboard')
+			}
+			else {
+				alert('Verify Email')
+			}	
+			
+			
 		} catch(error) {
 			alert(error.message)
 		}

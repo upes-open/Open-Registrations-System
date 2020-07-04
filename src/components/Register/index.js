@@ -22,6 +22,7 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+		//justifyContent: 'center',
 		padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
 	},
 	avatar: {
@@ -76,28 +77,20 @@ function Register(props) {
 						<InputLabel htmlFor="phone">Phone Number</InputLabel>
 						<Input id="phone" name="phone" autoComplete="off" value={phone} onChange={e => setPhone(e.target.value)}  />
 					</FormControl>
-					{/* <MuiPhoneNumber
-						id="phone"
-						name="phone"
-						label="Phone Number"
-						defaultCountry={"in"}
-						value={phone}
-						onChange={e => setPhone(e.target.value)}
-					/> */}
 					<FormControl margin="normal" required fullWidth>
 						<InputLabel htmlFor="password">Password</InputLabel>
 						<Input name="password" type="password" id="password" autoComplete="off" value={password} onChange={e => setPassword(e.target.value)}  />
 					</FormControl>
 					<FormControl margin="normal" fullWidth>
-						<InputLabel htmlFor="github">Your Github Username</InputLabel>
+						<InputLabel htmlFor="github">Github Username</InputLabel>
 						<Input name="github" type="text" id="github" autoComplete="off" value={github} onChange={e => setGithub(e.target.value)}  />
 					</FormControl>
 					<FormControl margin="normal" fullWidth>
-						<InputLabel htmlFor="linkedin">Your Linkedin Handle</InputLabel>
+						<InputLabel htmlFor="linkedin">Linkedin Handle</InputLabel>
 						<Input name="linkedin" type="text" id="linkedin" autoComplete="off" value={linkedin} onChange={e => setLinkedin(e.target.value)}  />
 					</FormControl>
 					<FormControl margin="normal" fullWidth>
-						<InputLabel htmlFor="twitter">Your Twitter Handle</InputLabel>
+						<InputLabel htmlFor="twitter">Twitter Handle</InputLabel>
 						<Input name="twitter" type="text" id="twitter" autoComplete="off" value={twitter} onChange={e => setTwitter(e.target.value)}  />
 					</FormControl>
 					<FormControl margin="normal" fullWidth>
@@ -142,7 +135,8 @@ function Register(props) {
 			// await firebase.addLinkedin(linkedin)
 			// await firebase.addTwitter(twitter)
 			// await firebase.addUniversity(university)
-			props.history.replace('/dashboard')
+			alert('A confirmation e-mail has been sent!')
+			props.history.replace('/login')
 		} catch(error) {
 			alert(error.message)
 		}
